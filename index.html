@@ -1,11 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>   ‍   </title>
+  <meta charset="UTF-8">
+  <title>Redirect to Embedded URL</title>
+  <script>
+    // Function to embed the URL into a new window
+    function embedURL() {
+      var currentURL = window.location.href; // Get the current URL
+      var hasExecuted = sessionStorage.getItem('hasExecuted'); // Check if code has executed
+
+      if (!hasExecuted) {
+        var win = window.open(); // Open a new window
+        win.document.body.style.margin = "0";
+        win.document.body.style.height = "100vh";
+        var iframe = win.document.createElement("iframe");
+        iframe.style.border = "none";
+        iframe.style.width = "100%";
+        iframe.style.height = "100%";
+        iframe.style.margin = "0";
+        iframe.referrerPolicy = "no-referrer";
+        iframe.allow = "fullscreen";
+        iframe.src = currentURL; // Set the iframe source to the current URL
+        win.document.body.appendChild(iframe); // Append iframe to the new window
+        
+        sessionStorage.setItem('hasExecuted', true); // Set flag in sessionStorage
+      }
+    }
+
+    // Call the embedURL function when the page loads
+    window.onload = function() {
+      embedURL();
+    };
+  </script>
 </head>
 <body>
-    <h1>Hmmmm...</h1>
+  <p>Loading...</p>
 </body>
 </html>
